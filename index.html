@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="声の架け橋">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#1a3a5c">
+  <title>声の架け橋</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="app-header">
+    <h1>🗣️ 声の架け橋</h1>
+    <button class="settings-btn" id="settingsBtn" aria-label="設定">⚙️</button>
+  </header>
+
+  <!-- カテゴリタブ -->
+  <nav class="category-nav" id="categoryNav" role="tablist" aria-label="カテゴリ">
+    <button class="cat-btn active" data-category="greeting" role="tab" aria-selected="true">あいさつ</button>
+    <button class="cat-btn" data-category="body" role="tab" aria-selected="false">体の状態</button>
+    <button class="cat-btn" data-category="feelings" role="tab" aria-selected="false">気持ち</button>
+    <button class="cat-btn" data-category="food" role="tab" aria-selected="false">食事・飲み物</button>
+    <button class="cat-btn" data-category="requests" role="tab" aria-selected="false">お願い</button>
+  </nav>
+
+  <!-- フレーズ一覧 -->
+  <main class="phrase-grid" id="phraseGrid" role="tabpanel" aria-label="フレーズ一覧">
+    <!-- JS で動的生成 -->
+  </main>
+
+  <!-- 最後に話した言葉 -->
+  <div class="last-spoken" id="lastSpokenArea">
+    <span class="last-label">最後の言葉：</span>
+    <button class="last-text" id="lastText" aria-label="もう一度話す">（ここをタップでもう一度）</button>
+  </div>
+
+  <!-- 自由入力エリア -->
+  <footer class="free-input">
+    <textarea
+      id="customText"
+      placeholder="ここに入力して「話す」ボタンを押す..."
+      rows="2"
+      aria-label="自由に入力して話す"
+    ></textarea>
+    <button class="speak-btn" id="speakBtn" aria-label="入力した文を話す">▶ 話す</button>
+  </footer>
+
+  <!-- 設定モーダル -->
+  <div class="modal-overlay" id="settingsModal" role="dialog" aria-modal="true" aria-label="設定" hidden>
+    <div class="modal">
+      <h2>⚙️ 設定</h2>
+
+      <div class="setting-row">
+        <label for="rateSlider">話すスピード</label>
+        <div class="slider-row">
+          <span>遅い</span>
+          <input type="range" id="rateSlider" min="0.5" max="1.5" step="0.1" value="0.85" aria-label="話すスピード">
+          <span>速い</span>
+        </div>
+        <div class="slider-value" id="rateValue">標準より少し遅め</div>
+      </div>
+
+      <div class="setting-row">
+        <label for="volumeSlider">音量</label>
+        <div class="slider-row">
+          <span>小さく</span>
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1" aria-label="音量">
+          <span>大きく</span>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <label>音声モード</label>
+        <div class="radio-row">
+          <label class="radio-label">
+            <input type="radio" name="voiceMode" value="tts" checked>
+            <span>ブラウザ内蔵音声（今すぐ使える）</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="voiceMode" value="mp3">
+            <span>クローン音声 MP3（用意後に使用）</span>
+          </label>
+        </div>
+      </div>
+
+      <button class="close-btn" id="closeSettings">閉じる</button>
+    </div>
+  </div>
+
+  <!-- 再生中インジケーター -->
+  <div class="speaking-indicator" id="speakingIndicator" aria-live="polite" aria-hidden="true">
+    <span class="wave">🔊</span> <span id="speakingText"></span>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

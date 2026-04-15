@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 背景 -->
+  <rect width="512" height="512" rx="80" fill="#1a3a5c"/>
+  <!-- 音声バブル -->
+  <path d="M 160 160 Q 160 120 200 120 L 312 120 Q 352 120 352 160 L 352 240 Q 352 280 312 280 L 240 280 L 200 320 L 210 280 L 200 280 Q 160 280 160 240 Z" fill="white" opacity="0.95"/>
+  <!-- 音波 -->
+  <line x1="210" y1="190" x2="210" y2="210" stroke="#1a3a5c" stroke-width="16" stroke-linecap="round"/>
+  <line x1="256" y1="175" x2="256" y2="225" stroke="#1a3a5c" stroke-width="16" stroke-linecap="round"/>
+  <line x1="302" y1="190" x2="302" y2="210" stroke="#1a3a5c" stroke-width="16" stroke-linecap="round"/>
+  <!-- 下部テキスト -->
+  <text x="256" y="400" text-anchor="middle" font-family="'Hiragino Sans','Meiryo',sans-serif" font-size="54" font-weight="bold" fill="white" opacity="0.9">声の架け橋</text>
+</svg>
