@@ -2,7 +2,7 @@
 // 声の架け橋 — sw.js  (Service Worker)
 // ============================================================
 
-const CACHE = 'koe-v1';
+const CACHE = 'koe-v2';
 
 const PRECACHE = [
   './',
