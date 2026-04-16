@@ -22,11 +22,13 @@
   --shadow:       0 3px 10px rgba(0,0,0,0.12);
   --shadow-press: 0 1px 3px rgba(0,0,0,0.15);
 
-  --c-greeting:  #16a34a;
-  --c-body:      #dc2626;
-  --c-feelings:  #7c3aed;
-  --c-food:      #d97706;
-  --c-requests:  #1d6fdb;
+  --c-okasan:   #e05a8a;
+  --c-cocoa:    #92400e;
+  --c-souchan:  #1d6fdb;
+  --c-honochan: #7c3aed;
+  --c-meguchan: #16a34a;
+  --c-ryokun:   #0f5986;
+  --c-driving:  #d97706;
 
   --font-sm:   16px;
   --font-base: 20px;
@@ -125,11 +127,13 @@ body {
   min-height: 48px;
 }
 
-.cat-btn[data-category="greeting"].active { background: var(--c-greeting); color: white; border-color: var(--c-greeting); }
-.cat-btn[data-category="body"].active     { background: var(--c-body);     color: white; border-color: var(--c-body); }
-.cat-btn[data-category="feelings"].active { background: var(--c-feelings); color: white; border-color: var(--c-feelings); }
-.cat-btn[data-category="food"].active     { background: var(--c-food);     color: white; border-color: var(--c-food); }
-.cat-btn[data-category="requests"].active { background: var(--c-requests); color: white; border-color: var(--c-requests); }
+.cat-btn[data-category="okasan"].active   { background: var(--c-okasan);   color: white; border-color: var(--c-okasan); }
+.cat-btn[data-category="cocoa"].active    { background: var(--c-cocoa);    color: white; border-color: var(--c-cocoa); }
+.cat-btn[data-category="souchan"].active  { background: var(--c-souchan);  color: white; border-color: var(--c-souchan); }
+.cat-btn[data-category="honochan"].active { background: var(--c-honochan); color: white; border-color: var(--c-honochan); }
+.cat-btn[data-category="meguchan"].active { background: var(--c-meguchan); color: white; border-color: var(--c-meguchan); }
+.cat-btn[data-category="ryokun"].active   { background: var(--c-ryokun);   color: white; border-color: var(--c-ryokun); }
+.cat-btn[data-category="driving"].active  { background: var(--c-driving);  color: white; border-color: var(--c-driving); }
 
 .cat-btn:active { opacity: 0.75; }
 
@@ -173,11 +177,13 @@ body {
   box-shadow: var(--shadow-press);
 }
 
-.phrase-btn[data-cat="greeting"] { border-left-color: var(--c-greeting); }
-.phrase-btn[data-cat="body"]     { border-left-color: var(--c-body); }
-.phrase-btn[data-cat="feelings"] { border-left-color: var(--c-feelings); }
-.phrase-btn[data-cat="food"]     { border-left-color: var(--c-food); }
-.phrase-btn[data-cat="requests"] { border-left-color: var(--c-requests); }
+.phrase-btn[data-cat="okasan"]   { border-left-color: var(--c-okasan); }
+.phrase-btn[data-cat="cocoa"]    { border-left-color: var(--c-cocoa); }
+.phrase-btn[data-cat="souchan"]  { border-left-color: var(--c-souchan); }
+.phrase-btn[data-cat="honochan"] { border-left-color: var(--c-honochan); }
+.phrase-btn[data-cat="meguchan"] { border-left-color: var(--c-meguchan); }
+.phrase-btn[data-cat="ryokun"]   { border-left-color: var(--c-ryokun); }
+.phrase-btn[data-cat="driving"]  { border-left-color: var(--c-driving); }
 
 @keyframes pulse {
   0%   { transform: scale(1); }
