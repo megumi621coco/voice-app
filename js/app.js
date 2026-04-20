@@ -29,7 +29,8 @@ const PHRASES = {
     'ココちゃん、待て！',
     'ココちゃん、伏せ！',
     'ココちゃん、おすわり',
-    'ココちゃん、散歩行くよ',
+    'ココちゃん、散歩に行くよ',
+    'ココちゃん、おりこうさん',
   ],
   souchan: [
     'そうちゃん、おはよう',
@@ -154,19 +155,34 @@ function speakTTS(text) {
   window.speechSynthesis.speak(utt);
 }
 
-function speakMP3(text) {
-  // MP3ファイルが用意されている場合のフォールバック
-  // audio/ フォルダ配下のファイル名はフレーズのハッシュ or 番号
-  // 現時点ではフォールバックとして TTS を使用
-  speakTTS(text);
+let currentAudio = null;
+
+function speakMP3(category, index) {
+  const num = String(index + 1).padStart(2, '0');
+  const path = `audio/${category}_${num}.mp3`;
+
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
+
+  const audio = new Audio(path);
+  audio.volume = settings.volume;
+  currentAudio = audio;
+
+  audio.play().catch(() => {
+    // MP3がない場合はTTSにフォールバック
+    const text = PHRASES[category][index];
+    if (text) speakTTS(text);
+  });
 }
 
-function speakText(text) {
+function speakText(text, category, index) {
   if (!text || !text.trim()) return;
   const t = text.trim();
 
-  if (settings.voiceMode === 'mp3') {
-    speakMP3(t);
+  if (category && index !== undefined) {
+    speakMP3(category, index);
   } else {
     speakTTS(t);
   }
@@ -204,17 +220,16 @@ function renderPhrases(category) {
   const grid = document.getElementById('phraseGrid');
   grid.innerHTML = '';
 
-  (PHRASES[category] || []).forEach(phrase => {
+  (PHRASES[category] || []).forEach((phrase, index) => {
     const btn = document.createElement('button');
     btn.className = 'phrase-btn';
     btn.dataset.cat = category;
     btn.textContent = phrase;
     btn.addEventListener('click', () => {
       btn.classList.remove('speaking');
-      // reflow で再アニメ
       void btn.offsetWidth;
       btn.classList.add('speaking');
-      speakText(phrase);
+      speakText(phrase, category, index);
     });
     grid.appendChild(btn);
   });
