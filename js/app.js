@@ -224,7 +224,14 @@ function renderPhrases(category) {
     const btn = document.createElement('button');
     btn.className = 'phrase-btn';
     btn.dataset.cat = category;
-    btn.textContent = phrase;
+    const idx = phrase.indexOf('、');
+    if (idx !== -1) {
+      const name = phrase.substring(0, idx);
+      const rest = phrase.substring(idx + 1);
+      btn.innerHTML = `<span class="btn-name">${name}</span><span class="btn-phrase">${rest}</span>`;
+    } else {
+      btn.textContent = phrase;
+    }
     btn.addEventListener('click', () => {
       btn.classList.remove('speaking');
       void btn.offsetWidth;

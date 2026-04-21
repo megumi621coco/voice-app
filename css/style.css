@@ -170,6 +170,21 @@ body {
   line-height: 1.45;
   word-break: break-all;
   border-left: 6px solid transparent;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.btn-name {
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.65;
+  line-height: 1.2;
+}
+
+.btn-phrase {
+  font-size: var(--font-base);
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 .phrase-btn:active {
