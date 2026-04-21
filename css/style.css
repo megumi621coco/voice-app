@@ -3,6 +3,14 @@
    老眼・スマホ対応：大きめUI・ハイコントラスト
    ============================================================ */
 
+/* ---- フォント ---- */
+@font-face {
+  font-family: 'HanatoTyoutyo';
+  src: url('hanatotyoutyo/hanatotyoutyo/花とちょうちょ.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* ---- リセット & 変数 ---- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -44,7 +52,7 @@ html {
 }
 
 body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', 'Yu Gothic UI', sans-serif;
+  font-family: 'HanatoTyoutyo', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
   font-size: var(--font-base);
   color: var(--text);
   background: var(--bg);
