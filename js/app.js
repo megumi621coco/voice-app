@@ -133,9 +133,11 @@ let indicatorTimer = null;
 function initVoices() {
   function pick() {
     voices = window.speechSynthesis.getVoices();
-    // 日本語男性声を優先（端末依存）
+    // 男性日本語声を優先（iOS: Otoya、Android: male系）
     selectedVoice =
+      voices.find(v => /otoya/i.test(v.name)) ||
       voices.find(v => v.lang === 'ja-JP' && /男|otoko|male/i.test(v.name)) ||
+      voices.find(v => v.lang === 'ja-JP' && /hattori/i.test(v.name)) ||
       voices.find(v => v.lang === 'ja-JP') ||
       voices.find(v => v.lang.startsWith('ja')) ||
       null;
@@ -150,7 +152,7 @@ function speakTTS(text) {
   utt.lang = 'ja-JP';
   utt.rate = settings.rate;
   utt.volume = settings.volume;
-  utt.pitch = 0.88; // やや低め（男性的に）
+  utt.pitch = 0.72;
   if (selectedVoice) utt.voice = selectedVoice;
   window.speechSynthesis.speak(utt);
 }
