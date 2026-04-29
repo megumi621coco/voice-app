@@ -2,7 +2,7 @@
 // おしゃべりお父さん — sw.js  (Service Worker)
 // ============================================================
 
-const CACHE = 'koe-v4';
+const CACHE = 'koe-v5';
 
 const PRECACHE = [
   './',
