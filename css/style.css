@@ -395,6 +395,21 @@ body {
   flex-shrink: 0;
 }
 
+.voice-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: inherit;
+  color: var(--text);
+  background: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.voice-select:focus { border-color: var(--primary); }
+
 .close-btn {
   width: 100%;
   padding: 16px;

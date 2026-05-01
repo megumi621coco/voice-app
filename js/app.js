@@ -109,6 +109,7 @@ let settings = {
   rate: 0.85,
   volume: 1.0,
   voiceMode: 'tts', // 'tts' | 'mp3'
+  voiceName: '',    // 選択した声の名前（空=自動）
 };
 
 function loadSettings() {
@@ -133,18 +134,42 @@ let indicatorTimer = null;
 function initVoices() {
   function pick() {
     voices = window.speechSynthesis.getVoices();
-    // 男性日本語声を優先（iOS: Otoya、Android: male/SMTm系）
+    if (!voices.length) return;
+    applyVoiceSetting();
+    populateVoiceSelect();
+  }
+  pick();
+  window.speechSynthesis.onvoiceschanged = pick;
+}
+
+function applyVoiceSetting() {
+  if (settings.voiceName) {
+    selectedVoice = voices.find(v => v.name === settings.voiceName) || null;
+  }
+  if (!selectedVoice) {
     selectedVoice =
       voices.find(v => /otoya/i.test(v.name)) ||
       voices.find(v => v.lang === 'ja-JP' && /male|SMTm|otoko|男/i.test(v.name)) ||
-      voices.find(v => v.lang === 'ja-JP' && /hattori/i.test(v.name)) ||
       voices.find(v => /ja.*male|male.*ja/i.test(v.name)) ||
       voices.find(v => v.lang === 'ja-JP') ||
       voices.find(v => v.lang.startsWith('ja')) ||
       null;
   }
-  pick();
-  window.speechSynthesis.onvoiceschanged = pick;
+}
+
+function populateVoiceSelect() {
+  const sel = document.getElementById('voiceSelect');
+  if (!sel) return;
+  const jaVoices = voices.filter(v => v.lang.startsWith('ja'));
+  if (!jaVoices.length) return;
+  sel.innerHTML = '';
+  jaVoices.forEach(v => {
+    const opt = document.createElement('option');
+    opt.value = v.name;
+    opt.textContent = v.name;
+    if (selectedVoice && v.name === selectedVoice.name) opt.selected = true;
+    sel.appendChild(opt);
+  });
 }
 
 function speakTTS(text) {
@@ -266,6 +291,7 @@ function openSettings() {
     r.checked = r.value === settings.voiceMode;
   });
   updateRateLabel(settings.rate);
+  populateVoiceSelect();
 }
 
 function closeSettings() {
@@ -278,6 +304,11 @@ function applySettings() {
   settings.volume = parseFloat(document.getElementById('volumeSlider').value);
   const modeEl = document.querySelector('input[name="voiceMode"]:checked');
   if (modeEl) settings.voiceMode = modeEl.value;
+  const voiceSel = document.getElementById('voiceSelect');
+  if (voiceSel && voiceSel.value) {
+    settings.voiceName = voiceSel.value;
+    selectedVoice = voices.find(v => v.name === voiceSel.value) || null;
+  }
   saveSettings();
 }
 
